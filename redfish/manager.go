@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/stmcginnis/gofish/common"
+	"github.com/ciferlu1024/gofish/common"
 )
 
 // CommandConnectTypesSupported is the command connection type.

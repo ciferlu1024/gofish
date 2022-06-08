@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"reflect"
 
-	"github.com/stmcginnis/gofish/common"
+	"github.com/ciferlu1024/gofish/common"
 )
 
 // LogEntryTypes is the type of log entry.

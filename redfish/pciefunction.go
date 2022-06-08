@@ -7,7 +7,7 @@ package redfish
 import (
 	"encoding/json"
 
-	"github.com/stmcginnis/gofish/common"
+	"github.com/ciferlu1024/gofish/common"
 )
 
 // DeviceClass is the device class.

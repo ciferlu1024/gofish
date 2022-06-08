@@ -12,7 +12,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/stmcginnis/gofish"
+	"github.com/ciferlu1024/gofish"
 )
 
 func main() {
