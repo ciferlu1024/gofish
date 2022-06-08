@@ -406,6 +406,7 @@ func ListReferencedManagers(c common.Client, link string) ([]*Manager, error) {
 	var result []*Manager
 	links, err := common.GetCollection(c, link)
 	if err != nil {
+		fmt.Println("Link Error!")
 		return result, err
 	}
 
