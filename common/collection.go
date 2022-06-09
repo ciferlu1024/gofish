@@ -53,6 +53,7 @@ func GetCollection(c Client, uri string) (*Collection, error) {
 	var result Collection
 	err = json.NewDecoder(resp.Body).Decode(&result)
 	fmt.Println("common/collection.go GetCollection输出", err)
+	fmt.Println(&result)
 	if err != nil {
 		return nil, err
 	}
