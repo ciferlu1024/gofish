@@ -45,6 +45,7 @@ func (c *Collection) UnmarshalJSON(b []byte) error {
 // GetCollection retrieves a collection from the service.
 func GetCollection(c Client, uri string) (*Collection, error) {
 	resp, err := c.Get(uri)
+	fmt.Println(resp.Body)
 	if err != nil {
 		return nil, err
 	}
