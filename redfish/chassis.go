@@ -323,6 +323,11 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 
 	var chassis Chassis
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
+
+        fmt.Println("body", json.NewDecoder(resp.Body))
+        fmt.Println("manager", &chassis)
+        fmt.Println("redfish/chassis.go GetChassis输出", err)
+
 	if err != nil {
 		return nil, err
 	}
