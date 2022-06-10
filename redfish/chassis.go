@@ -339,7 +339,6 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 // ListReferencedChassis gets the collection of Chassis from a provided reference.
 func ListReferencedChassis(c common.Client, link string) ([]*Chassis, error) {
 	var result []*Chassis
-	fmt.Println("***************get chassis***********************")
 	links, err := common.GetCollection(c, link)
 	if err != nil {
 		return result, err
@@ -347,10 +346,13 @@ func ListReferencedChassis(c common.Client, link string) ([]*Chassis, error) {
 
 	collectionError := common.NewCollectionError()
 	for _, chassisLink := range links.ItemLinks {
+	        fmt.Println("***************get chassis***********************")
 		chassis, err := GetChassis(c, chassisLink)
 		if err != nil {
+			fmt.Println("**********get chassis发现错误！*****")
 			collectionError.Failures[chassisLink] = err
 		} else {
+			fmt.Println("**********get chassis未发现错误******")
 			result = append(result, chassis)
 		}
 	}
