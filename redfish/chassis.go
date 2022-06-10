@@ -339,6 +339,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 // ListReferencedChassis gets the collection of Chassis from a provided reference.
 func ListReferencedChassis(c common.Client, link string) ([]*Chassis, error) {
 	var result []*Chassis
+	fmt.Println("***************get chassis***********************")
 	links, err := common.GetCollection(c, link)
 	if err != nil {
 		return result, err
