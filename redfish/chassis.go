@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
+	"io/ioutil"
 
 	"github.com/ciferlu1024/gofish/common"
 )
@@ -324,9 +325,11 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	var chassis Chassis
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
 
-        fmt.Println("body", json.NewDecoder(resp.Body))
-        fmt.Println("manager", &chassis)
-        fmt.Println("redfish/chassis.go GetChassis输出", err)
+        mybodys, _ := ioutil.ReadAll(resp.Body)
+        fmt.Println("**********************body", json.NewDecoder(resp.Body))
+        fmt.Println("**********************body", mybodys)
+        fmt.Println("**********************chassis", &chassis)
+        fmt.Println("**********************redfish/chassis.go GetChassis输出", err)
 
 	if err != nil {
 		return nil, err
