@@ -46,7 +46,7 @@ func (c *Collection) UnmarshalJSON(b []byte) error {
 func GetCollection(c Client, uri string) (*Collection, error) {
 	resp, err := c.Get(uri)
 	fmt.Println("resp", resp)
-	fmt.Println("resp.body", &resp.Body)
+	fmt.Println("resp.body", *resp.Body)
 	if err != nil {
 		return nil, err
 	}
