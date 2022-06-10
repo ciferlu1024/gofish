@@ -393,6 +393,11 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
 
 	var manager Manager
 	err = json.NewDecoder(resp.Body).Decode(&manager)
+
+        fmt.Println("body", json.NewDecoder(resp.Body))
+        fmt.Println("manager", &manager)
+        fmt.Println("common/collection.go GetCollection输出", err)
+
 	if err != nil {
 		return nil, err
 	}
