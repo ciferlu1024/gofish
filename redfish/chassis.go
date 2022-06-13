@@ -318,6 +318,7 @@ func (chassis *Chassis) Update() error {
 func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	resp, err := c.Get(uri)
 	if err != nil {
+		fmt.Println("***************get chassis函数报错！")
 		return nil, err
 	}
 	defer resp.Body.Close()
