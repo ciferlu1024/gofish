@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
+	"io"
 	"io/ioutil"
 	"bytes"
 //	"os"
@@ -336,7 +337,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 		fmt.Println("**************************chassis json body:\n", out.Bytes())
 	}
 	//out.WriteTo(os.Stdout)
-	var jsonout string
+	var jsonout io.Writer
 	_, err := out.WriteTo(jsonout)
 	fmt.Println(jsonout)
 
