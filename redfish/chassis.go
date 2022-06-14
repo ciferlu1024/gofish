@@ -375,6 +375,8 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 					fmt.Println(k, "is int", v2)
 				case bool:
 					fmt.Println(k, "is bool", v2)
+				case float64:
+					fmt.Println(k, "is float64", v2)
 				case []interface{}:
 					fmt.Println(k, "is an array:")
 					for i, iv := range v2 {
