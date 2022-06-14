@@ -319,7 +319,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	fmt.Println("**********************chassis uri", uri)
 	resp, err := c.Get(uri)
 	if err != nil {
-		fmt.Println("***************chassis get函数报错！")
+		fmt.Println("***************chassis get函数获取数据报错！")
 		return nil, err
 	}
 	defer resp.Body.Close()
