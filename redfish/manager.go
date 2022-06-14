@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 //	"io"
-//	"io/ioutil"
+	"io/ioutil"
 	"net/http"
 	"reflect"
 
@@ -388,7 +388,6 @@ func (manager *Manager) Update() error {
 
 // GetManager will get a Manager instance from the Swordfish service.
 func GetManager(c common.Client, uri string) (*Manager, error) {
-	rw := http.ResponseWriter
 	fmt.Println("****uri", uri)
 	resp, err := c.Get(uri)
 	if err != nil {
@@ -396,14 +395,16 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
 	}
 	defer resp.Body.Close()
 	//body, err := io.ReadAll(resp.Body)
-	//body, err := ioutil.ReadAll(resp.Body)
-	//fmt.Println("****body", body)
+	body, err := ioutil.ReadAll(resp.Body)
+	fmt.Println("****body", body)
+	/*
 	len := resp.ContentLength
 	fmt.Println("****len", len)
 	body := make([]byte, len + 5)
 	resp.Body.Read(body)
 	//fmt.Println("****body", body)
 	fmt.Fprintln(rw, body)
+	*/
 
 	var manager Manager
 	err = json.NewDecoder(resp.Body).Decode(&manager)

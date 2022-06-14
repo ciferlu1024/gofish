@@ -316,9 +316,10 @@ func (chassis *Chassis) Update() error {
 
 // GetChassis will get a Chassis instance from the Redfish service.
 func GetChassis(c common.Client, uri string) (*Chassis, error) {
+	fmt.Println("**********************chassis uri", uri)
 	resp, err := c.Get(uri)
 	if err != nil {
-		fmt.Println("***************get chassis函数报错！")
+		fmt.Println("***************chassis get函数报错！")
 		return nil, err
 	}
 	defer resp.Body.Close()
@@ -327,8 +328,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
 
         mybodys, _ := ioutil.ReadAll(resp.Body)
-        fmt.Println("**********************body", json.NewDecoder(resp.Body))
-        fmt.Println("**********************body", mybodys)
+        fmt.Println("**********************chassis body", mybodys)
         fmt.Println("**********************chassis", &chassis)
         fmt.Println("**********************redfish/chassis.go GetChassis输出", err)
 
