@@ -10,7 +10,6 @@ import (
 	"reflect"
 	"io/ioutil"
 	"bytes"
-	"encoding/json"
 
 	"github.com/ciferlu1024/gofish/common"
 )
@@ -332,7 +331,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
         fmt.Println("**********************chassis body", mybodys)
 
 	var out bytes.Buffer
-	err := json.Indent(&out, mybodys, "", "\t")
+	err = json.Indent(&out, mybodys, "", "\t")
 	if err != nil {
 		fmt.Println("**************************chassis json body 报错!", err)
 	}else{
