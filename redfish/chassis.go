@@ -338,7 +338,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	}
 	//out.WriteTo(os.Stdout)
 	var jsonout io.Writer
-	_, err := out.WriteTo(jsonout)
+	_, err = out.WriteTo(jsonout)
 	fmt.Println(jsonout)
 
 	var chassis Chassis
