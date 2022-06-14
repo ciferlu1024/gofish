@@ -7,6 +7,7 @@ package redfish
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"reflect"
 
 	"github.com/ciferlu1024/gofish/common"
@@ -390,11 +391,12 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	body, err := io.ReadAll(resp.Body)
+	fmt.Println("****body", body)
 
 	var manager Manager
 	err = json.NewDecoder(resp.Body).Decode(&manager)
 
-	fmt.Println("****body", resp.Body)
         fmt.Println("****body", json.NewDecoder(resp.Body))
         fmt.Println("****manager", manager.ID)
         fmt.Println("****common/collection.go GetCollection输出", err)
