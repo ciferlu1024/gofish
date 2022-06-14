@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"reflect"
 
 	"github.com/ciferlu1024/gofish/common"
@@ -392,7 +393,12 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	body, err := io.ReadAll(resp.Body)
+	//body, err := io.ReadAll(resp.Body)
+	//body, err := ioutil.ReadAll(resp.Body)
+	//fmt.Println("****body", body)
+	len := resp.ContentLength
+	body := make([]byte, len)
+	resp.Body.Read(body)
 	fmt.Println("****body", body)
 
 	var manager Manager
@@ -400,7 +406,7 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
 
         fmt.Println("****body", json.NewDecoder(resp.Body))
         fmt.Println("****manager", manager.ID)
-        fmt.Println("****common/collection.go GetCollection输出", err)
+        fmt.Println("****redfish/manager.go GetManager输出", err)
 
 	if err != nil {
 		return nil, err
