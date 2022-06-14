@@ -389,6 +389,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	}
 
 	fmt.Println("r的值：", r)
+	fmt.Println("r.id的值：", r["Id"])
 
 	var chassis Chassis
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
