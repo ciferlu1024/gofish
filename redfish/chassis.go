@@ -8,10 +8,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"reflect"
-	"io"
 	"io/ioutil"
 	"bytes"
-//	"os"
+	"os"
 
 	"github.com/ciferlu1024/gofish/common"
 )
@@ -336,10 +335,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	}else{
 		fmt.Println("**************************chassis json body:\n", out.Bytes())
 	}
-	//out.WriteTo(os.Stdout)
-	var jsonout io.Writer
-	_, err = out.WriteTo(jsonout)
-	fmt.Println(jsonout)
+	out.WriteTo(os.Stdout)
 
 	var chassis Chassis
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
