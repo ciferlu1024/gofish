@@ -333,7 +333,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	if err != nil {
 		fmt.Println("**************************chassis json body 报错!", err)
 	}else{
-		fmt.Println("**************************chassis json body:\n", out.Bytes())
+		fmt.Println("**************************chassis json body: 已获取\n")
 	}
 	//out.WriteTo(os.Stdout)
 
@@ -341,9 +341,38 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	defer file.Close()
 	out.WriteTo(file)
 
-	// var r interface{}
-	// err = json.Unmarshal(out.WriteTo(os.Stdout), &r)
-	// fmt.Println("r", r)
+	// 读取json文件获取json数据
+	jsonFile, err := os.Open("tmp/chassisjson.txt")
+	defer jsonFile.Close()
+	jsonData, err := ioutil.ReadAll(jsonFile)
+
+	// 重新解析json数据
+
+	var r interface()
+	err = json.Unmarshal(jsonData, &r)
+
+	// 修改json数据部分字段的格式
+	gobook, ok := r.(map[string]interface{})
+
+	if ok {
+	    for k, v := range gobook {
+	        switch v2 := v.(type) {
+	            case string:
+	                fmt.Println(k, "is string", v2)
+	            case int:
+	                fmt.Println(k, "is int", v2)
+	            case bool:
+	                fmt.Println(k, "is bool", v2)
+	            case []interface{}:
+	                fmt.Println(k, "is an array:")
+	                for i, iv := range v2 {
+	                    fmt.Println(i, iv)
+	                }
+	            default:
+	                fmt.Println(k, "is another type not handle yet")
+	        }
+	   }
+	}
 
 
 	var chassis Chassis
