@@ -9,6 +9,7 @@ import (
 	"fmt"
 //	"io"
 //	"io/ioutil"
+	"net/http"
 	"reflect"
 
 	"github.com/ciferlu1024/gofish/common"
@@ -387,6 +388,7 @@ func (manager *Manager) Update() error {
 
 // GetManager will get a Manager instance from the Swordfish service.
 func GetManager(c common.Client, uri string) (*Manager, error) {
+	rw := http.ResponseWriter
 	fmt.Println("****uri", uri)
 	resp, err := c.Get(uri)
 	if err != nil {
@@ -400,7 +402,8 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
 	fmt.Println("****len", len)
 	body := make([]byte, len + 5)
 	resp.Body.Read(body)
-	fmt.Println("****body", body)
+	//fmt.Println("****body", body)
+	fmt.Fprintln(rw, body)
 
 	var manager Manager
 	err = json.NewDecoder(resp.Body).Decode(&manager)
