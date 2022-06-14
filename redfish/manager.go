@@ -397,7 +397,8 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
 	//body, err := ioutil.ReadAll(resp.Body)
 	//fmt.Println("****body", body)
 	len := resp.ContentLength
-	body := make([]byte, len)
+	fmt.Println("****len", len)
+	body := make([]byte, len + 5)
 	resp.Body.Read(body)
 	fmt.Println("****body", body)
 
