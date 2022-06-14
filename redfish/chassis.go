@@ -338,7 +338,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	//out.WriteTo(os.Stdout)
 
 	var r interface{}
-	err := json.Unmarshal(out.WriteTo(os.Stdout), &r)
+	_, err := json.Unmarshal(out.WriteTo(os.Stdout), &r)
 	fmt.Println("r", r)
 
 
