@@ -337,14 +337,13 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	}
 	//out.WriteTo(os.Stdout)
 
-	/*
-	var r interface{}
-	err = json.Unmarshal(out.WriteTo(os.Stdout), &r)
-	fmt.Println("r", r)
-	*/
+	file, _ := os.Create("/tmp/chassisjson.txt")
+	out.WriteTo(os.file)
 
-	a, err := out.WriteTo(os.Stdout)
-	fmt.Println("a", a)
+	// var r interface{}
+	// err = json.Unmarshal(out.WriteTo(os.Stdout), &r)
+	// fmt.Println("r", r)
+
 
 	var chassis Chassis
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
