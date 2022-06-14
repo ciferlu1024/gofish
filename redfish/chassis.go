@@ -342,7 +342,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	out.WriteTo(file)
 
 	// 读取json文件获取json数据
-	jsonFile, err := os.Open("tmp/chassisjson.txt")
+	jsonFile, err := os.Open("/tmp/chassisjson.txt")
 	if err != nil {
 		fmt.Println("error opening json file")
 	}else{
