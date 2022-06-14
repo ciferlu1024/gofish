@@ -7,8 +7,8 @@ package redfish
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"io/ioutil"
+//	"io"
+//	"io/ioutil"
 	"reflect"
 
 	"github.com/ciferlu1024/gofish/common"
