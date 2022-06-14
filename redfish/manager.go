@@ -386,6 +386,7 @@ func (manager *Manager) Update() error {
 
 // GetManager will get a Manager instance from the Swordfish service.
 func GetManager(c common.Client, uri string) (*Manager, error) {
+	fmt.Println("****uri", uri)
 	resp, err := c.Get(uri)
 	if err != nil {
 		return nil, err
