@@ -9,7 +9,6 @@ import (
 	"fmt"
 //	"io"
 	"io/ioutil"
-	"net/http"
 	"reflect"
 
 	"github.com/ciferlu1024/gofish/common"
