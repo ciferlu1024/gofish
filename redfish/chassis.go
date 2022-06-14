@@ -321,14 +321,17 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	if err != nil {
 		fmt.Println("***************chassis get函数获取数据报错！")
 		return nil, err
+	}else{
+		fmt.Println("***************chassis get函数获取数据正常！")
 	}
 	defer resp.Body.Close()
+
+        mybodys, _ := ioutil.ReadAll(resp.Body)
+        fmt.Println("**********************chassis body", mybodys)
 
 	var chassis Chassis
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
 
-        mybodys, _ := ioutil.ReadAll(resp.Body)
-        fmt.Println("**********************chassis body", mybodys)
         fmt.Println("**********************chassis", &chassis)
         fmt.Println("**********************redfish/chassis.go GetChassis输出", err)
 
