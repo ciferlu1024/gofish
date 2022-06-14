@@ -349,7 +349,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	// 重新解析json数据
 
 	var r interface{}
-	err := json.Unmarshal(jsonData, &r)
+	err = json.Unmarshal(jsonData, &r)
 
 	// 修改json数据部分字段的格式
 	gobook, ok := r.(map[string]interface{})
