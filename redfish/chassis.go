@@ -345,7 +345,6 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	jsonFile, err := os.Open("tmp/chassisjson.txt")
 	if err != nil {
 		fmt.Println("error opening json file")
-		return
 	}else{
 		fmt.Println("已打开json文件")
 	}
@@ -354,7 +353,6 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	jsonData, err := ioutil.ReadAll(jsonFile)
 	if err!= nil {
 		fmt.Println("error reading json file")
-		return
 	}else{
 		fmt.Println("已读取json数据")
 	}
