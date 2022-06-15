@@ -44,9 +44,13 @@ func (c *Collection) UnmarshalJSON(b []byte) error {
 
 // GetCollection retrieves a collection from the service.
 func GetCollection(c Client, uri string) (*Collection, error) {
+	fmt.Println("*********当前gofish common collection的getcollection函数link url: ", uri)
 	resp, err := c.Get(uri)
 	if err != nil {
+		fmt.Println("**********gofish common collection的getcollection函数link url失败！")
 		return nil, err
+	}else{
+		fmt.Println("**********gofish common collection的getcollection函数link url成功")
 	}
 	defer resp.Body.Close()
 
