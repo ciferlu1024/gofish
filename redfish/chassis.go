@@ -393,6 +393,10 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 		}
 	}
 
+	fmt.Printf("gobook id的值:%v , 类型:%T ", gobook["Id"], gobook["Id"])
+	gobook["Id"] = "1"
+	fmt.Printf("gobook id的值:%v , 类型:%T ", gobook["Id"], gobook["Id"])
+
 
 	var chassis Chassis
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
