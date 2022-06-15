@@ -11,6 +11,8 @@ import (
 	"io/ioutil"
 	"bytes"
 	"os"
+	"io"
+	"strings"
 
 	"github.com/ciferlu1024/gofish/common"
 )
