@@ -6,6 +6,7 @@ package gofish
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"github.com/ciferlu1024/gofish/common"
 	"github.com/ciferlu1024/gofish/redfish"
