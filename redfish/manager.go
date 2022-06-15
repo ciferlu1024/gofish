@@ -395,7 +395,8 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-	//body, err := io.ReadAll(resp.Body)
+
+	/*
 	managerbody, err := ioutil.ReadAll(resp.Body)
 
 	var out bytes.Buffer
@@ -429,7 +430,7 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
         }
 
 	fmt.Println("***********manager取数完成！")
-
+	*/
 
 	var manager Manager
 	err = json.NewDecoder(resp.Body).Decode(&manager)
