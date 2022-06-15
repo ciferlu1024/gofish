@@ -445,18 +445,22 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
 // ListReferencedManagers gets the collection of Managers
 func ListReferencedManagers(c common.Client, link string) ([]*Manager, error) {
 	var result []*Manager
+	fmt.Println("**********manager c", c)
 	links, err := common.GetCollection(c, link)
 	if err != nil {
-		fmt.Println("Link Error!")
+		fmt.Println("***********gofish/redfish/manager.go ListReferencedManagers 报错!")
 		return result, err
 	}
 
 	collectionError := common.NewCollectionError()
 	for _, managerLink := range links.ItemLinks {
+		fmt.Println("***************get manager***********************")
 		manager, err := GetManager(c, managerLink)
 		if err != nil {
+			fmt.Println("**************get manager 发现错误！")
 			collectionError.Failures[managerLink] = err
 		} else {
+			fmt.Println("**************get manager 未发现错！")
 			result = append(result, manager)
 		}
 	}
