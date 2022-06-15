@@ -399,16 +399,17 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	newbodyjson, err := json.Marshal(newbodymap)
 	if err != nil {
 		fmt.Println("*************newbodyjson err:", err)
-	}else{
-		fmt.Println("*************newbodyjson内容:")
 	}
 
+	/*
 	var out1 bytes.Buffer
         err = json.Indent(&out1, newbodyjson, "", "\t")
         out1.WriteTo(os.Stdout)
+	*/
 
 	var chassis Chassis
-	err = json.NewDecoder(resp.Body).Decode(&chassis)
+	//err = json.NewDecoder(resp.Body).Decode(&chassis)
+	err = json.NewDecoder(newbodyjson).Decode(&chassis)
 
 	if err != nil {
 		return nil, err
