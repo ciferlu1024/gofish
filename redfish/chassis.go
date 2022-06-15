@@ -364,7 +364,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	fmt.Println("r的值：", r)
 
 	// 修改json数据部分字段的格式
-	newbodymap, ok := r.(map[string]interface{})
+	newbodymap, _ := r.(map[string]interface{})
 
 	/*
 	if ok {
