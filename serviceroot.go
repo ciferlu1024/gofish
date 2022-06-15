@@ -237,6 +237,7 @@ func (serviceroot *Service) Chassis() ([]*redfish.Chassis, error) {
 
 // Managers gets the manager instances of this service.
 func (serviceroot *Service) Managers() ([]*redfish.Manager, error) {
+	fmt.Println("gofish/serviceroot 文件 Managers() 函数被调用, 它要调用ListReferencedManagers")
 	return redfish.ListReferencedManagers(serviceroot.Client, serviceroot.managers)
 }
 
