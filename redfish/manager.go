@@ -450,6 +450,8 @@ func ListReferencedManagers(c common.Client, link string) ([]*Manager, error) {
 	if err != nil {
 		fmt.Println("***********gofish/redfish/manager.go ListReferencedManagers 报错!")
 		return result, err
+	}else{
+		fmt.Println("***********gofish/redfish/manager.go ListReferencedManagers 没有报错!")
 	}
 
 	collectionError := common.NewCollectionError()
