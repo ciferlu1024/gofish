@@ -400,10 +400,12 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	if err != nil {
 		fmt.Println("*************newbodyjson err:", err)
 	}else{
-		fmt.Println("*************newbodyjson内容:", newbodyjson)
+		fmt.Println("*************newbodyjson内容:")
 	}
 
-
+	var out1 bytes.Buffer
+        err = json.Indent(&out1, newbodyjson, "", "\t")
+        out1.WriteTo(os.Stdout)
 
 	var chassis Chassis
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
