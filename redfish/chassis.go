@@ -398,7 +398,9 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
 	fmt.Printf("newbodymap power的值:%v , 类型:%T \n", newbodymap["Power"], newbodymap["Power"])
 	newbodymap["Id"] = "1"
+	delete(newbodymap["Power"].(map[string]interface{}), "Health")
 	fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
+	fmt.Printf("newbodymap power的值:%v , 类型:%T \n", newbodymap["Power"], newbodymap["Power"])
 	newbodyjson, err := json.Marshal(newbodymap)
 	if err != nil {
 		fmt.Println("*************newbodyjson err:", err)
