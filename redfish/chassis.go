@@ -364,8 +364,9 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	fmt.Println("r的值：", r)
 
 	// 修改json数据部分字段的格式
-	gobook, ok := r.(map[string]interface{})
+	newbodymap, ok := r.(map[string]interface{})
 
+	/*
 	if ok {
 		fmt.Println("已解析json文件")
 		fmt.Printf("gobook的类型：%T\n", gobook)
@@ -388,14 +389,20 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 				default:
 					fmt.Println(k, "is another type not handle yet")
 			}
-			*/
 			fmt.Printf("%v 的值是: %v, 类型是: %T\n", k, v, v)
 		}
 	}
+	*/
+	fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
+	newbodymap["Id"] = "1"
+	fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
+	newbodyjson, err := json.Marshal(newbodymap)
+	if err != nil {
+		fmt.Println("*************newbodyjson err:", err)
+	}else{
+		fmt.Println("*************newbodyjson内容:", newbodyjson)
+	}
 
-	fmt.Printf("gobook id的值:%v , 类型:%T ", gobook["Id"], gobook["Id"])
-	gobook["Id"] = "1"
-	fmt.Printf("gobook id的值:%v , 类型:%T ", gobook["Id"], gobook["Id"])
 
 
 	var chassis Chassis
