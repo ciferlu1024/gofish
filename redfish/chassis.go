@@ -330,7 +330,6 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 
 	// os.Stdout 输出原始json内容!
         mybodys, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("**********resp 头部信息: ", resp.Header)
 	var out bytes.Buffer
 	err = json.Indent(&out, mybodys, "", "\t")
 	if err != nil {
@@ -364,7 +363,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 
 	var r interface{}
 	err = json.Unmarshal(jsonData, &r)
-	fmt.Println("r的值：", r)
+	// fmt.Println("r的值：", r)
 
 	// 修改json数据部分字段的格式
 	newbodymap, _ := r.(map[string]interface{})
@@ -397,6 +396,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	}
 	*/
 	fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
+	fmt.Printf("newbodymap power的值:%v , 类型:%T \n", newbodymap["Power"], newbodymap["Power"])
 	newbodymap["Id"] = "1"
 	fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
 	newbodyjson, err := json.Marshal(newbodymap)
