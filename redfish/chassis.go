@@ -328,6 +328,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 
 	// os.Stdout 输出原始json内容!
         mybodys, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("**********resp 头部信息: ", resp.Header)
 	var out bytes.Buffer
 	err = json.Indent(&out, mybodys, "", "\t")
 	if err != nil {
@@ -408,8 +409,8 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	*/
 
 	var chassis Chassis
-	fmt.Printf("resp.body内容: %v, 类型是: %T", resp.Body, resp.Body)
-	fmt.Printf("newbodyjson的类型是: %T", newbodyjson)
+	fmt.Printf("resp.body内容: %v, 类型是: %T \n", resp.Body, resp.Body)
+	fmt.Printf("newbodyjson的类型是: %T \n", newbodyjson)
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
 	//err = json.NewDecoder(newbodyjson).Decode(&chassis)
 
