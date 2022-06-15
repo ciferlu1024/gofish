@@ -368,33 +368,6 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	// 修改json数据部分字段的格式
 	newbodymap, _ := r.(map[string]interface{})
 
-	/*
-	if ok {
-		fmt.Println("已解析json文件")
-		fmt.Printf("gobook的类型：%T\n", gobook)
-		for k, v := range gobook {
-			/*
-			switch v2 := v.(type) {
-				case string:
-					fmt.Println(k, "is string", v2)
-				case int:
-					fmt.Println(k, "is int", v2)
-				case bool:
-					fmt.Println(k, "is bool", v2)
-				case float64:
-					fmt.Println(k, "is float64", v2)
-				case []interface{}:
-					fmt.Println(k, "is an array:")
-					for i, iv := range v2 {
-						fmt.Println(i, iv)
-					}
-				default:
-					fmt.Println(k, "is another type not handle yet")
-			}
-			fmt.Printf("%v 的值是: %v, 类型是: %T\n", k, v, v)
-		}
-	}
-	*/
 	fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
 	fmt.Printf("newbodymap power的值:%v , 类型:%T \n", newbodymap["Power"], newbodymap["Power"])
 	newbodymap["Id"] = "1"

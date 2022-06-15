@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 //	"io"
+	"bytes"
 	"io/ioutil"
 	"reflect"
 
@@ -387,30 +388,50 @@ func (manager *Manager) Update() error {
 
 // GetManager will get a Manager instance from the Swordfish service.
 func GetManager(c common.Client, uri string) (*Manager, error) {
-	fmt.Println("****uri", uri)
+	fmt.Println("****************manager uri", uri)
 	resp, err := c.Get(uri)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 	//body, err := io.ReadAll(resp.Body)
-	body, err := ioutil.ReadAll(resp.Body)
-	fmt.Println("****body", body)
-	/*
-	len := resp.ContentLength
-	fmt.Println("****len", len)
-	body := make([]byte, len + 5)
-	resp.Body.Read(body)
-	//fmt.Println("****body", body)
-	fmt.Fprintln(rw, body)
-	*/
+	managerbody, err := ioutil.ReadAll(resp.Body)
+
+	var out bytes.Buffer
+        err = json.Indent(&out, managerbody, "", "\t")
+        if err != nil {
+                fmt.Println("**************************manager json body 报错!", err)
+        }else{
+                fmt.Println("**************************manager json body: 已获取\n")
+        }
+        //out.WriteTo(os.Stdout)
+
+        file, _ := os.Create("/tmp/managerjson.txt")
+        defer file.Close()
+        out.WriteTo(file)
+
+
+	// 读取json文件获取json数据
+        jsonFile, err := os.Open("/tmp/managerjson.txt")
+        if err != nil {
+                fmt.Println("error opening json file")
+        }else{
+                fmt.Println("已打开managerjson文件")
+        }
+
+        defer jsonFile.Close()
+        jsonData, err := ioutil.ReadAll(jsonFile)
+        if err!= nil {
+                fmt.Println("error reading json file")
+        }else{
+                fmt.Println("已读取managerjson数据", jsonData)
+        }
+
+	fmt.Println("***********manager取数完成！")
+
 
 	var manager Manager
 	err = json.NewDecoder(resp.Body).Decode(&manager)
-
-        fmt.Println("****body", json.NewDecoder(resp.Body))
-        fmt.Println("****manager", manager.ID)
-        fmt.Println("****redfish/manager.go GetManager输出", err)
 
 	if err != nil {
 		return nil, err
