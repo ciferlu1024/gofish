@@ -8,9 +8,9 @@ import (
 	"encoding/json"
 	"fmt"
 //	"io"
-	"bytes"
-	"os"
-	"io/ioutil"
+//	"bytes"
+//	"os"
+//	"io/ioutil"
 	"reflect"
 
 	"github.com/ciferlu1024/gofish/common"
