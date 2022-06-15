@@ -361,12 +361,14 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 
 	var r interface{}
 	err = json.Unmarshal(jsonData, &r)
+	fmt.Println("r的值：", r)
 
 	// 修改json数据部分字段的格式
 	gobook, ok := r.(map[string]interface{})
 
 	if ok {
 		fmt.Println("已解析json文件")
+		fmt.Println("gobook的类型：%v", gobook)
 		for k, v := range gobook {
 			switch v2 := v.(type) {
 				case string:
@@ -388,8 +390,6 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 		}
 	}
 
-	fmt.Println("r的值：", r)
-	fmt.Println("r.id的值：", r["Id"])
 
 	var chassis Chassis
 	err = json.NewDecoder(resp.Body).Decode(&chassis)
