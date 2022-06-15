@@ -368,7 +368,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 
 	if ok {
 		fmt.Println("已解析json文件")
-		fmt.Println("gobook的类型：%v", gobook)
+		fmt.Printf("gobook的类型：%v", gobook)
 		for k, v := range gobook {
 			switch v2 := v.(type) {
 				case string:
