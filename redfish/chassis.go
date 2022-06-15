@@ -368,8 +368,9 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 
 	if ok {
 		fmt.Println("已解析json文件")
-		fmt.Printf("gobook的类型：%T", gobook)
+		fmt.Printf("gobook的类型：%T\n", gobook)
 		for k, v := range gobook {
+			/*
 			switch v2 := v.(type) {
 				case string:
 					fmt.Println(k, "is string", v2)
@@ -387,6 +388,8 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 				default:
 					fmt.Println(k, "is another type not handle yet")
 			}
+			*/
+			fmt.Println(k, "的值的类型是:", v.(type))
 		}
 	}
 
