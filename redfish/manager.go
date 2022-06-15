@@ -459,7 +459,7 @@ func ListReferencedManagers(c common.Client, link string) ([]*Manager, error) {
 		fmt.Println("***************get manager***********************")
 		manager, err := GetManager(c, managerLink)
 		if err != nil {
-			fmt.Println("**************get manager 发现错误！")
+			fmt.Println("**************get manager 发现错误！", err)
 			collectionError.Failures[managerLink] = err
 		} else {
 			fmt.Println("**************get manager 未发现错！")
