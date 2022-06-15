@@ -411,11 +411,15 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	var chassis Chassis
 	fmt.Printf("resp.body内容: %v, 类型是: %T \n", resp.Body, resp.Body)
 	fmt.Printf("newbodyjson的类型是: %T \n", newbodyjson)
-	err = json.NewDecoder(resp.Body).Decode(&chassis)
-	//err = json.NewDecoder(newbodyjson).Decode(&chassis)
+	var newjsonreader io.Reader
+	newjsonreader = strings.NewReader(string(newbodyjson))
+	//err = json.NewDecoder(resp.Body).Decode(&chassis)
+	err = json.NewDecoder(newjsonreader).Decode(&chassis)
 
 	if err != nil {
 		return nil, err
+	}else{
+		fmt.Println("**********新的body已读取！")
 	}
 
 	chassis.SetClient(c)
