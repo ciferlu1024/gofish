@@ -389,7 +389,7 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 					fmt.Println(k, "is another type not handle yet")
 			}
 			*/
-			fmt.Println(k, "的值的类型是:", v.(type))
+			fmt.Println(k, "的值的类型是: %T", v)
 		}
 	}
 
