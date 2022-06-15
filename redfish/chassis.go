@@ -408,6 +408,8 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	*/
 
 	var chassis Chassis
+	fmt.Printf("resp.body内容: %v, 类型是: %T", resp.Body, resp.Body)
+	fmt.Printf("newbodyjson的类型是: %T", newbodyjson)
 	//err = json.NewDecoder(resp.Body).Decode(&chassis)
 	err = json.NewDecoder(newbodyjson).Decode(&chassis)
 
