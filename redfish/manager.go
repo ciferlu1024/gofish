@@ -405,7 +405,7 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
         }else{
                 fmt.Println("**************************manager json body: 已获取\n")
         }
-        //out.WriteTo(os.Stdout)
+        out.WriteTo(os.Stdout)
 
         file, _ := os.Create("/tmp/managerjson.txt")
         defer file.Close()
