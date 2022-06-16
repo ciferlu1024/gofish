@@ -204,11 +204,14 @@ func GetPower(c common.Client, uri string) (*Power, error) {
         newbodymap, _ := r.(map[string]interface{})
 
 	fmt.Printf("powercontrol powerconsumedwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"])
+	/*
 	fmt.Printf("powercontrol powercapacitywatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"])
 	fmt.Printf("powercontrol powerlimit的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"])
 	fmt.Printf("powercontrol powerlimit limitinwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"])
 	fmt.Printf("powercontrol powercapacitywatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"])
-
+	*/
+	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerCapacityWatts")
+	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerLimit")
 
 
         newbodyjson, err := json.Marshal(newbodymap)
