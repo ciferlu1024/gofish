@@ -62,7 +62,7 @@ const (
 )
 
 // PowerLimitException is the type of power limit exception.
-// type PowerLimitException string
+type PowerLimitException string
 
 const (
 
