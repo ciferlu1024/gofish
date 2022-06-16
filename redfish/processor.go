@@ -443,8 +443,57 @@ func GetProcessor(c common.Client, uri string) (*Processor, error) {
 	}
 	defer resp.Body.Close()
 
+	// os.Stdout 输出原始json内容!
+        mybodys, _ := ioutil.ReadAll(resp.Body)
+        var out bytes.Buffer
+        err = json.Indent(&out, mybodys, "", "\t")
+        if err != nil {
+                fmt.Println("**************************processor json body 报错!", err)
+        }else{
+                fmt.Println("**************************processor json body: 已获取\n")
+        }
+	file, _ := os.Create("/tmp/processorjson.txt")
+        defer file.Close()
+        out.WriteTo(file)
+
+	// 读取json文件获取json数据
+        jsonFile, err := os.Open("/tmp/chassisjson.txt")
+        if err != nil {
+                fmt.Println("error opening processor json file")
+        }else{
+                fmt.Println("已打开processorjson文件")
+        }
+
+        defer jsonFile.Close()
+        jsonData, err := ioutil.ReadAll(jsonFile)
+        if err!= nil {
+                fmt.Println("error reading processor json file")
+        }else{
+                fmt.Println("已读取processorjson数据")
+        }
+
+	// 重新解析json数据
+
+        var r interface{}
+        err = json.Unmarshal(jsonData, &r)
+        // fmt.Println("r的值：", r)
+
+	// 修改json数据部分字段的格式
+        newbodymap, _ := r.(map[string]interface{})
+
+        fmt.Printf("newbodymap Socket的值:%v , 类型:%T \n", newbodymap["Socket"], newbodymap["Socket"])
+        newbodymap["Socket"] = strconv.Itoa(newbodymap["Socket"])
+        fmt.Printf("newbodymap Socket的值:%v , 类型:%T \n", newbodymap["Socket"], newbodymap["Socket"])
+        newbodyjson, err := json.Marshal(newbodymap)
+        if err != nil {
+                fmt.Println("*************newbodyjson err:", err)
+        }
+
 	var processor Processor
-	err = json.NewDecoder(resp.Body).Decode(&processor)
+	//err = json.NewDecoder(resp.Body).Decode(&processor)
+	var newjsonreader io.Reader
+        newjsonreader = strings.NewReader(string(newbodyjson))
+	err = json.NewDecoder(newjsonreader).Decode(&processor)
 	if err != nil {
 		return nil, err
 	}
