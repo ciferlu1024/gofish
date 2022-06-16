@@ -275,17 +275,17 @@ type PowerControl struct {
 	PhysicalContext common.PhysicalContext
 	// PowerAllocatedWatts shall represent the total power currently allocated
 	// to chassis resources.
-	PowerAllocatedWatts float32
+	PowerAllocatedWatts float64
 	// PowerAvailableWatts shall represent the amount of power capacity (in
 	// Watts) not already allocated and shall equal PowerCapacityWatts -
 	// PowerAllocatedWatts.
-	PowerAvailableWatts float32
+	PowerAvailableWatts float64
 	// PowerCapacityWatts shall represent the total power capacity that is
 	// available for allocation to the chassis resources.
-	PowerCapacityWatts float32
+	PowerCapacityWatts float64
 	// PowerConsumedWatts shall represent the actual power being consumed (in
 	// Watts) by the chassis.
-	PowerConsumedWatts float32
+	PowerConsumedWatts float64
 	// PowerLimit shall contain power limit status and configuration information
 	// for this chassis.
 	PowerLimit PowerLimit
@@ -295,7 +295,7 @@ type PowerControl struct {
 	// PowerRequestedWatts shall represent the
 	// amount of power (in Watts) that the chassis resource is currently
 	// requesting be budgeted to it for future use.
-	PowerRequestedWatts float32
+	PowerRequestedWatts float64
 	// Status shall contain any status or health properties
 	// of the resource.
 	Status common.Status
