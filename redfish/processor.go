@@ -7,6 +7,10 @@ package redfish
 import (
 	"encoding/json"
 	"strconv"
+	"ioutil"
+	"bytes"
+	"fmt"
+	"os"
 
 	"github.com/ciferlu1024/gofish/common"
 )
