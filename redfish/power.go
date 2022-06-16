@@ -211,9 +211,10 @@ func GetPower(c common.Client, uri string) (*Power, error) {
 	fmt.Printf("powercontrol powercapacitywatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"])
 	*/
 	var a float64 = 0
+	var b string = 0
 	newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"] = a
 	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"] = a
-	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"] = a
+	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"] = b
 
 
         newbodyjson, err := json.Marshal(newbodymap)
@@ -354,7 +355,7 @@ type PowerLimit struct {
 	// LimitInWatts shall represent the power
 	// cap limit in watts for the resource. If set to null, power capping
 	// shall be disabled.
-	LimitInWatts float32
+	LimitInWatts float64
 }
 
 // PowerMetric shall contain power metrics for power
