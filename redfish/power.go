@@ -9,6 +9,10 @@ import (
 	"reflect"
 	"strconv"
 	"fmt"
+	"bytes"
+	"io"
+	"io/ioutil"
+	"os"
 
 	"github.com/ciferlu1024/gofish/common"
 )
@@ -158,10 +162,64 @@ func GetPower(c common.Client, uri string) (*Power, error) {
 	}
 	defer resp.Body.Close()
 
-	fmt.Println("**********************power.go getpower body 已获取！")
+	// os.Stdout 输出原始json内容!
+        mybodys, _ := ioutil.ReadAll(resp.Body)
+        var out bytes.Buffer
+        err = json.Indent(&out, mybodys, "", "\t")
+        if err != nil {
+                fmt.Println("**************************power.go json body 报错!", err)
+        }else{
+                fmt.Println("**************************power.go json body: 已获取\n")
+        }
+        //out.WriteTo(os.Stdout)
+
+        file, _ := os.Create("/tmp/powerjson.txt")
+        defer file.Close()
+        out.WriteTo(file)
+
+        // 读取json文件获取json数据
+        jsonFile, err := os.Open("/tmp/powerjson.txt")
+        if err != nil {
+                fmt.Println("error opening power json file")
+        }else{
+                fmt.Println("已打开power json文件")
+        }
+
+        defer jsonFile.Close()
+        jsonData, err := ioutil.ReadAll(jsonFile)
+        if err!= nil {
+                fmt.Println("error reading power json file")
+        }else{
+                fmt.Println("已读取power json数据")
+        }
+
+        // 重新解析json数据
+
+        var r interface{}
+        err = json.Unmarshal(jsonData, &r)
+        // fmt.Println("r的值：", r)
+
+        // 修改json数据部分字段的格式
+        newbodymap, _ := r.(map[string]interface{})
+
+	fmt.Printf("powercontrol powerconsumedwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"])
+	fmt.Printf("powercontrol powercapacitywatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"])
+	fmt.Printf("powercontrol powerlimit的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"])
+	fmt.Printf("powercontrol powerlimit limitinwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"])
+	fmt.Printf("powercontrol powercapacitywatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"])
+
+
+
+        newbodyjson, err := json.Marshal(newbodymap)
+        if err != nil {
+                fmt.Println("*************newbodyjson err:", err)
+        }
 
 	var power Power
-	err = json.NewDecoder(resp.Body).Decode(&power)
+	var newjsonreader io.Reader
+	newjsonreader = strings.NewReader(string(newbodyjson))
+	err = json.NewDecoder(newjsonreader).Decode(&chassis)
+	//err = json.NewDecoder(resp.Body).Decode(&power)
 	if err != nil {
 		return nil, err
 	}
