@@ -1,6 +1,6 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
-//
+// 注释了关于PowerLimit字段的所有内容
 
 package redfish
 
@@ -62,7 +62,7 @@ const (
 )
 
 // PowerLimitException is the type of power limit exception.
-type PowerLimitException string
+// type PowerLimitException string
 
 const (
 
@@ -211,10 +211,8 @@ func GetPower(c common.Client, uri string) (*Power, error) {
 	fmt.Printf("powercontrol powercapacitywatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"])
 	*/
 	var a float64 = 0
-	var b string = "0"
 	newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"] = a
-	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"] = a
-	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"] = b
+	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerLimit")
 
 
         newbodyjson, err := json.Marshal(newbodymap)
@@ -294,7 +292,7 @@ type PowerControl struct {
 	PowerConsumedWatts float64
 	// PowerLimit shall contain power limit status and configuration information
 	// for this chassis.
-	PowerLimit PowerLimit
+	// PowerLimit PowerLimit
 	// PowerMetrics shall contain power metrics for power readings (interval,
 	// minimum/maximum/average power consumption) for the chassis.
 	PowerMetrics PowerMetric
@@ -342,6 +340,8 @@ func (powercontrol *PowerControl) UnmarshalJSON(b []byte) error { // nolint:dupl
 
 // PowerLimit shall contain power limit status and
 // configuration information for this chassis.
+
+/*
 type PowerLimit struct {
 	// CorrectionInMs shall represent the time
 	// interval in ms required for the limiting process to react and reduce
@@ -357,6 +357,7 @@ type PowerLimit struct {
 	// shall be disabled.
 	LimitInWatts float64
 }
+*/
 
 // PowerMetric shall contain power metrics for power
 // readings (interval, minimum/maximum/average power consumption) for a
