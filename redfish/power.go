@@ -148,9 +148,13 @@ type Power struct {
 
 // GetPower will get a Power instance from the service.
 func GetPower(c common.Client, uri string) (*Power, error) {
+	fmt.Println("******************power.go getpower", uri)
 	resp, err := c.Get(uri)
 	if err != nil {
+		fmt.Println("*********************power.go getpower get 没有报错！")
 		return nil, err
+	}else{
+		fmt.Println("*********************power.go getpower get 报错！")
 	}
 	defer resp.Body.Close()
 
