@@ -173,7 +173,10 @@ func ListReferencedPowers(c common.Client, link string) ([]*Power, error) { //no
 
 	links, err := common.GetCollection(c, link)
 	if err != nil {
+		fmt.Println("power.go ListReferencedPowers getcollection 有报错！")
 		return result, err
+	}else{
+		fmt.Println("power.go ListReferencedPowers getcollection 没有错！")
 	}
 
 	collectionError := common.NewCollectionError()
