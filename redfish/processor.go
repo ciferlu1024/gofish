@@ -7,7 +7,7 @@ package redfish
 import (
 	"encoding/json"
 	"strconv"
-	"ioutil"
+	"io/ioutil"
 	"bytes"
 	"fmt"
 	"os"
