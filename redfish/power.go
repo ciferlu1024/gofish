@@ -13,6 +13,7 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/ciferlu1024/gofish/common"
 )
@@ -218,7 +219,7 @@ func GetPower(c common.Client, uri string) (*Power, error) {
 	var power Power
 	var newjsonreader io.Reader
 	newjsonreader = strings.NewReader(string(newbodyjson))
-	err = json.NewDecoder(newjsonreader).Decode(&chassis)
+	err = json.NewDecoder(newjsonreader).Decode(&power)
 	//err = json.NewDecoder(resp.Body).Decode(&power)
 	if err != nil {
 		return nil, err
