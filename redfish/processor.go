@@ -11,6 +11,8 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"io"
+	"strings"
 
 	"github.com/ciferlu1024/gofish/common"
 )
@@ -486,7 +488,7 @@ func GetProcessor(c common.Client, uri string) (*Processor, error) {
         newbodymap, _ := r.(map[string]interface{})
 
         fmt.Printf("newbodymap Socket的值:%v , 类型:%T \n", newbodymap["Socket"], newbodymap["Socket"])
-        newbodymap["Socket"] = strconv.Itoa(newbodymap["Socket"])
+	newbodymap["Socket"] = strconv.FormatFloat(newbodymap["Socket"].(float64), 'f', -1, 64)
         fmt.Printf("newbodymap Socket的值:%v , 类型:%T \n", newbodymap["Socket"], newbodymap["Socket"])
         newbodyjson, err := json.Marshal(newbodymap)
         if err != nil {
