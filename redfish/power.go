@@ -1,6 +1,5 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
-// 注释了关于PowerLimit字段的所有内容
 
 package redfish
 
@@ -210,15 +209,12 @@ func GetPower(c common.Client, uri string) (*Power, error) {
 	fmt.Printf("powercontrol powerlimit limitexception的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"])
 	var a float64 = 0
 	var b string = "0"
-	newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"] = a
-	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"] = a
-	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"] = b
-	//delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerLimit")
-	fmt.Printf("powercontrol powerconsumedwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"])
-	fmt.Printf("powercontrol powercapacitywatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"])
-	fmt.Printf("powercontrol powerlimit的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"])
-	fmt.Printf("powercontrol powerlimit limitinwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"])
-	fmt.Printf("powercontrol powerlimit limitexception的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"])
+//	newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"] = a
+//	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"] = a
+//	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"] = b
+	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerLimit")
+	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerCapacityWatts")
+	fmt.Printf("powercontrol的值:%v , 类型:%T \n", newbodymap["PowerControl"], newbodymap["PowerControl"])
 
 
         newbodyjson, err := json.Marshal(newbodymap)
