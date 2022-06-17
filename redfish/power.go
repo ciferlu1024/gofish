@@ -100,19 +100,19 @@ type InputRange struct {
 	InputType InputType
 	// MaximumFrequencyHz shall contain the value in Hertz of the maximum line
 	// input frequency which the power supply is capable of consuming for this range.
-	MaximumFrequencyHz float32
+	MaximumFrequencyHz float64
 	// MaximumVoltage shall contain the value in Volts of the maximum line input
 	// voltage which the power supply is capable of consuming for this range.
-	MaximumVoltage float32
+	MaximumVoltage float64
 	// MinimumFrequencyHz shall contain the value in Hertz of the minimum line
 	// input frequency which the power supply is capable of consuming for this range.
-	MinimumFrequencyHz float32
+	MinimumFrequencyHz float64
 	// MinimumVoltage shall contain the value in Volts of the minimum line input
 	// voltage which the power supply is capable of consuming for this range.
-	MinimumVoltage float32
+	MinimumVoltage float64
 	// OutputWattage shall contain the maximum amount of power, in Watts, that
 	// the associated power supply is rated to deliver while operating in this input range.
-	OutputWattage float32
+	OutputWattage float64
 }
 
 // Power is used to represent a power metrics resource for a Redfish
@@ -208,7 +208,7 @@ func GetPower(c common.Client, uri string) (*Power, error) {
 	fmt.Printf("powercontrol powerlimit的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"])
 	fmt.Printf("powercontrol powerlimit limitinwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"])
 	fmt.Printf("powercontrol powerlimit limitexception的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"])
-	var a float32 = 0
+	var a float64 = 0
 	var b string = "0"
 	newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"] = a
 	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"] = a
@@ -285,14 +285,14 @@ type PowerControl struct {
 	PhysicalContext common.PhysicalContext
 	// PowerAllocatedWatts shall represent the total power currently allocated
 	// to chassis resources.
-	PowerAllocatedWatts float32
+	PowerAllocatedWatts float64
 	// PowerAvailableWatts shall represent the amount of power capacity (in
 	// Watts) not already allocated and shall equal PowerCapacityWatts -
 	// PowerAllocatedWatts.
-	PowerAvailableWatts float32
+	PowerAvailableWatts float64
 	// PowerCapacityWatts shall represent the total power capacity that is
 	// available for allocation to the chassis resources.
-	PowerCapacityWatts float32
+	PowerCapacityWatts float64
 	// PowerConsumedWatts shall represent the actual power being consumed (in
 	// Watts) by the chassis.
 	PowerConsumedWatts float64
@@ -305,7 +305,7 @@ type PowerControl struct {
 	// PowerRequestedWatts shall represent the
 	// amount of power (in Watts) that the chassis resource is currently
 	// requesting be budgeted to it for future use.
-	PowerRequestedWatts float32
+	PowerRequestedWatts float64
 	// Status shall contain any status or health properties
 	// of the resource.
 	Status common.Status
@@ -362,7 +362,7 @@ type PowerLimit struct {
 	// LimitInWatts shall represent the power
 	// cap limit in watts for the resource. If set to null, power capping
 	// shall be disabled.
-	LimitInWatts float32
+	LimitInWatts float64
 }
 
 // PowerMetric shall contain power metrics for power
@@ -372,20 +372,20 @@ type PowerMetric struct {
 	// AverageConsumedWatts shall represent the
 	// average power level that occurred averaged over the last IntervalInMin
 	// minutes.
-	AverageConsumedWatts float32
+	AverageConsumedWatts float64
 	// IntervalInMin shall represent the time
 	// interval (or window), in minutes, in which the PowerMetrics properties
 	// are measured over.
 	// Should be an integer, but some Dell implementations return as a float.
-	IntervalInMin float32
+	IntervalInMin float64
 	// MaxConsumedWatts shall represent the
 	// maximum power level in watts that occurred within the last
 	// IntervalInMin minutes.
-	MaxConsumedWatts float32
+	MaxConsumedWatts float64
 	// MinConsumedWatts shall represent the
 	// minimum power level in watts that occurred within the last
 	// IntervalInMin minutes.
-	MinConsumedWatts float32
+	MinConsumedWatts float64
 }
 
 // PowerSupply is Details of a power supplies associated with this system
@@ -397,7 +397,7 @@ type PowerSupply struct {
 	assembly string
 	// EfficiencyPercent shall contain the value of the measured power
 	// efficiency, as a percentage, of the associated power supply.
-	EfficiencyPercent float32
+	EfficiencyPercent float64
 	// FirmwareVersion shall contain the firmware version as
 	// defined by the manufacturer for the associated power supply.
 	FirmwareVersion string
@@ -417,11 +417,11 @@ type PowerSupply struct {
 	InputRanges []InputRange
 	// LastPowerOutputWatts shall contain the average power
 	// output, measured in Watts, of the associated power supply.
-	LastPowerOutputWatts float32
+	LastPowerOutputWatts float64
 	// LineInputVoltage shall contain the value in Volts of
 	// the line input voltage (measured or configured for) that the power
 	// supply has been configured to operate with or is currently receiving.
-	LineInputVoltage float32
+	LineInputVoltage float64
 	// LineInputVoltageType shall contain the type of input
 	// line voltage supported by the associated power supply.
 	LineInputVoltageType LineInputVoltageType
@@ -446,13 +446,13 @@ type PowerSupply struct {
 	// PowerCapacityWatts shall contain the maximum amount
 	// of power, in Watts, that the associated power supply is rated to
 	// deliver.
-	PowerCapacityWatts float32
+	PowerCapacityWatts float64
 	// PowerInputWatts shall contain the value of the
 	// measured input power, in Watts, of the associated power supply.
-	PowerInputWatts float32
+	PowerInputWatts float64
 	// PowerOutputWatts shall contain the value of the
 	// measured output power, in Watts, of the associated power supply.
-	PowerOutputWatts float32
+	PowerOutputWatts float64
 	// PowerSupplyType shall contain the input power type
 	// (AC or DC) of the associated power supply.
 	PowerSupplyType PowerSupplyType
@@ -526,33 +526,33 @@ type Voltage struct {
 	// LowerThresholdCritical shall indicate
 	// the present reading is below the normal range but is not yet fatal.
 	// Units shall use the same units as the related ReadingVolts property.
-	LowerThresholdCritical float32
+	LowerThresholdCritical float64
 	// LowerThresholdFatal shall indicate the
 	// present reading is below the normal range and is fatal. Units shall
 	// use the same units as the related ReadingVolts property.
-	LowerThresholdFatal float32
+	LowerThresholdFatal float64
 	// LowerThresholdNonCritical shall indicate
 	// the present reading is below the normal range but is not critical.
 	// Units shall use the same units as the related ReadingVolts property.
-	LowerThresholdNonCritical float32
+	LowerThresholdNonCritical float64
 	// MaxReadingRange shall indicate the
 	// highest possible value for ReadingVolts. Units shall use the same
 	// units as the related ReadingVolts property.
-	MaxReadingRange float32
+	MaxReadingRange float64
 	// MemberID shall uniquely identify the member within the collection. For
 	// services supporting Redfish v1.6 or higher, this value shall be the
 	// zero-based array index.
 	MemberID string `json:"MemberId"`
 	// MinReadingRange shall indicate the lowest possible value for ReadingVolts.
 	// Units shall use the same units as the related ReadingVolts property.
-	MinReadingRange float32
+	MinReadingRange float64
 	// PhysicalContext shall be a description
 	// of the affected device or region within the chassis to which this
 	// voltage measurement applies.
 	PhysicalContext string
 	// ReadingVolts shall be the present
 	// reading of the voltage sensor's reading.
-	ReadingVolts float32
+	ReadingVolts float64
 	// SensorNumber shall be a numerical
 	// identifier for this voltage sensor that is unique within this
 	// resource.
@@ -563,15 +563,15 @@ type Voltage struct {
 	// UpperThresholdCritical shall indicate
 	// the present reading is above the normal range but is not yet fatal.
 	// Units shall use the same units as the related ReadingVolts property.
-	UpperThresholdCritical float32
+	UpperThresholdCritical float64
 	// UpperThresholdFatal shall indicate the
 	// present reading is above the normal range and is fatal. Units shall
 	// use the same units as the related ReadingVolts property.
-	UpperThresholdFatal float32
+	UpperThresholdFatal float64
 	// UpperThresholdNonCritical shall indicate
 	// the present reading is above the normal range but is not critical.
 	// Units shall use the same units as the related ReadingVolts property.
-	UpperThresholdNonCritical float32
+	UpperThresholdNonCritical float64
 }
 
 // UnmarshalJSON unmarshals a Voltage object from the raw JSON.
