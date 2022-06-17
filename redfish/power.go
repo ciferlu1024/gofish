@@ -315,6 +315,7 @@ func (powercontrol *PowerControl) UnmarshalJSON(b []byte) error { // nolint:dupl
 
 	err := json.Unmarshal(b, &t)
 	if err != nil {
+		fmt.Println("*******power.go UnmarshalJSON powercontrol 解析有报错！")
 		// See if we need to handle converting MemberID
 		var t2 struct {
 			t1
@@ -330,6 +331,7 @@ func (powercontrol *PowerControl) UnmarshalJSON(b []byte) error { // nolint:dupl
 		// Convert the numeric member ID to a string
 		t = t2.t1
 		t.temp.MemberID = strconv.Itoa(t2.MemberID)
+		fmt.Println("*****power.go powercontrol 解析结果: ", t.temp)
 	}
 
 	// Extract the links to other entities for later
