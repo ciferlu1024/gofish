@@ -49,8 +49,6 @@ func GetCollection(c Client, uri string) (*Collection, error) {
 	if err != nil {
 		fmt.Println("**********gofish common collection的getcollection函数link url失败！")
 		return nil, err
-	}else{
-		fmt.Println("**********gofish common collection的getcollection函数link url成功")
 	}
 	defer resp.Body.Close()
 

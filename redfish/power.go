@@ -204,15 +204,21 @@ func GetPower(c common.Client, uri string) (*Power, error) {
         newbodymap, _ := r.(map[string]interface{})
 
 	fmt.Printf("powercontrol powerconsumedwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"])
-	/*
 	fmt.Printf("powercontrol powercapacitywatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"])
 	fmt.Printf("powercontrol powerlimit的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"])
 	fmt.Printf("powercontrol powerlimit limitinwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"])
-	fmt.Printf("powercontrol powercapacitywatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"])
-	*/
+	fmt.Printf("powercontrol powerlimit limitexception的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"])
 	var a float32 = 0
+	var b string = "0"
 	newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"] = a
-	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerLimit")
+	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInwatts"] = a
+	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"] = b
+	//delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerLimit")
+	fmt.Printf("powercontrol powerconsumedwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"])
+	fmt.Printf("powercontrol powercapacitywatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"])
+	fmt.Printf("powercontrol powerlimit的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"])
+	fmt.Printf("powercontrol powerlimit limitinwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"])
+	fmt.Printf("powercontrol powerlimit limitexception的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"], newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"])
 
 
         newbodyjson, err := json.Marshal(newbodymap)
@@ -292,7 +298,7 @@ type PowerControl struct {
 	PowerConsumedWatts float32
 	// PowerLimit shall contain power limit status and configuration information
 	// for this chassis.
-	// PowerLimit PowerLimit
+	PowerLimit PowerLimit
 	// PowerMetrics shall contain power metrics for power readings (interval,
 	// minimum/maximum/average power consumption) for the chassis.
 	PowerMetrics PowerMetric
@@ -343,7 +349,6 @@ func (powercontrol *PowerControl) UnmarshalJSON(b []byte) error { // nolint:dupl
 // PowerLimit shall contain power limit status and
 // configuration information for this chassis.
 
-/*
 type PowerLimit struct {
 	// CorrectionInMs shall represent the time
 	// interval in ms required for the limiting process to react and reduce
@@ -359,7 +364,6 @@ type PowerLimit struct {
 	// shall be disabled.
 	LimitInWatts float32
 }
-*/
 
 // PowerMetric shall contain power metrics for power
 // readings (interval, minimum/maximum/average power consumption) for a

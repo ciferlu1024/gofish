@@ -389,7 +389,6 @@ func (manager *Manager) Update() error {
 
 // GetManager will get a Manager instance from the Swordfish service.
 func GetManager(c common.Client, uri string) (*Manager, error) {
-	fmt.Println("****************manager uri", uri)
 	resp, err := c.Get(uri)
 	if err != nil {
 		return nil, err
@@ -429,7 +428,6 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
                 fmt.Println("已读取managerjson数据", jsonData)
         }
 
-	fmt.Println("***********manager取数完成！")
 	*/
 
 	var manager Manager
@@ -446,24 +444,19 @@ func GetManager(c common.Client, uri string) (*Manager, error) {
 // ListReferencedManagers gets the collection of Managers
 func ListReferencedManagers(c common.Client, link string) ([]*Manager, error) {
 	var result []*Manager
-	fmt.Println("**********manager c", c)
 	links, err := common.GetCollection(c, link)
 	if err != nil {
 		fmt.Println("***********gofish/redfish/manager.go ListReferencedManagers 报错!")
 		return result, err
-	}else{
-		fmt.Println("***********gofish/redfish/manager.go ListReferencedManagers 没有报错!")
 	}
 
 	collectionError := common.NewCollectionError()
 	for _, managerLink := range links.ItemLinks {
-		fmt.Println("***************get manager***********************")
 		manager, err := GetManager(c, managerLink)
 		if err != nil {
 			fmt.Println("**************get manager 发现错误！", err)
 			collectionError.Failures[managerLink] = err
 		} else {
-			fmt.Println("**************get manager 未发现错！")
 			result = append(result, manager)
 		}
 	}

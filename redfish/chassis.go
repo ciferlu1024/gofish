@@ -320,7 +320,6 @@ func (chassis *Chassis) Update() error {
 
 // GetChassis will get a Chassis instance from the Redfish service.
 func GetChassis(c common.Client, uri string) (*Chassis, error) {
-	fmt.Println("**********************chassis uri", uri)
 	resp, err := c.Get(uri)
 	if err != nil {
 		return nil, err
@@ -334,8 +333,6 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	err = json.Indent(&out, mybodys, "", "\t")
 	if err != nil {
 		fmt.Println("**************************chassis json body 报错!", err)
-	}else{
-		fmt.Println("**************************chassis json body: 已获取\n")
 	}
 	//out.WriteTo(os.Stdout)
 
@@ -347,16 +344,12 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	jsonFile, err := os.Open("/tmp/chassisjson.txt")
 	if err != nil {
 		fmt.Println("error opening json file")
-	}else{
-		fmt.Println("已打开json文件")
 	}
 
 	defer jsonFile.Close()
 	jsonData, err := ioutil.ReadAll(jsonFile)
 	if err!= nil {
 		fmt.Println("error reading json file")
-	}else{
-		fmt.Println("已读取json数据")
 	}
 
 	// 重新解析json数据
@@ -368,12 +361,12 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	// 修改json数据部分字段的格式
 	newbodymap, _ := r.(map[string]interface{})
 
-	fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
-	fmt.Printf("newbodymap power的值:%v , 类型:%T \n", newbodymap["Power"], newbodymap["Power"])
+	//fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
+	//fmt.Printf("newbodymap power的值:%v , 类型:%T \n", newbodymap["Power"], newbodymap["Power"])
 	newbodymap["Id"] = "1"
 	delete(newbodymap["Power"].(map[string]interface{}), "Health")
-	fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
-	fmt.Printf("newbodymap power的值:%v , 类型:%T \n", newbodymap["Power"], newbodymap["Power"])
+	//fmt.Printf("newbodymap id的值:%v , 类型:%T \n", newbodymap["Id"], newbodymap["Id"])
+	//fmt.Printf("newbodymap power的值:%v , 类型:%T \n", newbodymap["Power"], newbodymap["Power"])
 	newbodyjson, err := json.Marshal(newbodymap)
 	if err != nil {
 		fmt.Println("*************newbodyjson err:", err)
@@ -386,8 +379,6 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 	*/
 
 	var chassis Chassis
-	fmt.Printf("resp.body内容: %v, 类型是: %T \n", resp.Body, resp.Body)
-	fmt.Printf("newbodyjson的类型是: %T \n", newbodyjson)
 	var newjsonreader io.Reader
 	newjsonreader = strings.NewReader(string(newbodyjson))
 	//err = json.NewDecoder(resp.Body).Decode(&chassis)
@@ -395,8 +386,6 @@ func GetChassis(c common.Client, uri string) (*Chassis, error) {
 
 	if err != nil {
 		return nil, err
-	}else{
-		fmt.Println("**********新的body已读取！")
 	}
 
 	chassis.SetClient(c)
@@ -413,13 +402,10 @@ func ListReferencedChassis(c common.Client, link string) ([]*Chassis, error) {
 
 	collectionError := common.NewCollectionError()
 	for _, chassisLink := range links.ItemLinks {
-	        fmt.Println("***************get chassis***********************")
 		chassis, err := GetChassis(c, chassisLink)
 		if err != nil {
-			fmt.Println("**********get chassis发现错误！*****")
 			collectionError.Failures[chassisLink] = err
 		} else {
-			fmt.Println("**********get chassis未发现错误******")
 			result = append(result, chassis)
 		}
 	}
