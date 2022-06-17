@@ -211,7 +211,7 @@ func GetPower(c common.Client, uri string) (*Power, error) {
 	var a float32 = 0
 	var b string = "0"
 	newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"] = a
-	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInwatts"] = a
+	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"] = a
 	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"] = b
 	//delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerLimit")
 	fmt.Printf("powercontrol powerconsumedwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"])
@@ -295,7 +295,7 @@ type PowerControl struct {
 	PowerCapacityWatts float32
 	// PowerConsumedWatts shall represent the actual power being consumed (in
 	// Watts) by the chassis.
-	PowerConsumedWatts float32
+	PowerConsumedWatts float64
 	// PowerLimit shall contain power limit status and configuration information
 	// for this chassis.
 	PowerLimit PowerLimit
