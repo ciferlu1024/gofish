@@ -223,6 +223,7 @@ func GetPower(c common.Client, uri string) (*Power, error) {
         if err != nil {
                 fmt.Println("*************newbodyjson err:", err)
         }
+	fmt.Println("**************power.go newbodyjson：", newbodyjson)
 
 	var power Power
 	var newjsonreader io.Reader
