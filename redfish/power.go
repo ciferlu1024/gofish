@@ -202,6 +202,7 @@ func GetPower(c common.Client, uri string) (*Power, error) {
         // 修改json数据部分字段的格式
         newbodymap, _ := r.(map[string]interface{})
 
+	fmt.Printf("newbodymap的值:%v , 类型:%T \n", newbodymap, newbodymap)
 	fmt.Printf("powercontrol的值:%v , 类型:%T \n", newbodymap["PowerControl"], newbodymap["PowerControl"])
 //	var a float64 = 0
 //	var b string = "0"
@@ -213,7 +214,7 @@ func GetPower(c common.Client, uri string) (*Power, error) {
 //	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerConsumedWatts")
 //	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerLimit")
 //	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerCapacityWatts")
-	delete(newbodymap.(map[string]interface{}), "PowerControl")
+	//delete(newbodymap.(map[string]interface{}), "PowerControl")
 	//fmt.Printf("powercontrol的值:%v , 类型:%T \n", newbodymap["PowerControl"], newbodymap["PowerControl"])
 
 
