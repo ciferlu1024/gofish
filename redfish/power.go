@@ -212,9 +212,11 @@ func GetPower(c common.Client, uri string) (*Power, error) {
 //	newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"] = a
 //	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"] = a
 //	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"] = b
+	newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"] = strconv.FormatFloat(newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"].(float64), 'f', -1, 64)
 	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerLimit")
 	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerCapacityWatts")
-	fmt.Printf("powercontrol的值:%v , 类型:%T \n", newbodymap["PowerControl"], newbodymap["PowerControl"])
+	fmt.Printf("powercontrol powerconsumedwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"])
+	//fmt.Printf("powercontrol的值:%v , 类型:%T \n", newbodymap["PowerControl"], newbodymap["PowerControl"])
 
 
         newbodyjson, err := json.Marshal(newbodymap)
