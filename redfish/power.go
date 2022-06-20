@@ -212,10 +212,10 @@ func GetPower(c common.Client, uri string) (*Power, error) {
 //	newbodymap["PowerControl"].(map[string]interface{})["PowerCapacityWatts"] = a
 //	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitInWatts"] = a
 //	newbodymap["PowerControl"].(map[string]interface{})["PowerLimit"].(map[string]interface{})["LimitException"] = b
-	newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"] = strconv.FormatFloat(newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"].(float64), 'f', -1, 64)
+//	newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"] = strconv.FormatFloat(newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"].(float64), 'f', -1, 64)
+	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerConsumedWatts")
 	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerLimit")
 	delete(newbodymap["PowerControl"].(map[string]interface{}), "PowerCapacityWatts")
-	fmt.Printf("powercontrol powerconsumedwatts的值:%v , 类型:%T \n", newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"], newbodymap["PowerControl"].(map[string]interface{})["PowerConsumedWatts"])
 	//fmt.Printf("powercontrol的值:%v , 类型:%T \n", newbodymap["PowerControl"], newbodymap["PowerControl"])
 
 
@@ -293,7 +293,7 @@ type PowerControl struct {
 	PowerCapacityWatts float64
 	// PowerConsumedWatts shall represent the actual power being consumed (in
 	// Watts) by the chassis.
-	PowerConsumedWatts string
+	PowerConsumedWatts float64
 	// PowerLimit shall contain power limit status and configuration information
 	// for this chassis.
 	PowerLimit PowerLimit
