@@ -293,7 +293,7 @@ type PowerControl struct {
 	PowerCapacityWatts float64
 	// PowerConsumedWatts shall represent the actual power being consumed (in
 	// Watts) by the chassis.
-	PowerConsumedWatts float64
+	PowerConsumedWatts string
 	// PowerLimit shall contain power limit status and configuration information
 	// for this chassis.
 	PowerLimit PowerLimit
