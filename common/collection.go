@@ -94,6 +94,7 @@ func (cr *CollectionError) Error() string {
 
 	errorsJSON, err := json.Marshal(entityErrors)
 	if err != nil {
+		fmt.Println("*********************collection.go panic错误")
 		panic(err)
 	}
 
