@@ -476,7 +476,10 @@ func (chassis *Chassis) Power() (*Power, error) {
 
 	power, err := GetPower(chassis.Client, chassis.power)
 	if err != nil {
+		fmt.Println("**********chassis.go Power() 有报错!")
 		return nil, err
+	}else{
+		fmt.Println("**********chassis.go Power() 正常!")
 	}
 
 	return power, nil
