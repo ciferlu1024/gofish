@@ -487,6 +487,7 @@ func (c *APIClient) dumpRequest(req *http.Request) error {
 	d = append(d, '\n')
 	_, err = c.dumpWriter.Write(d)
 	if err != nil {
+		fmt.Println("**************dump request panic错误！")
 		panic(err)
 	}
 
@@ -503,6 +504,7 @@ func (c *APIClient) dumpResponse(resp *http.Response) error {
 	d = append(d, '\n')
 	_, err = c.dumpWriter.Write(d)
 	if err != nil {
+		fmt.Println("**************dump response panic错误！")
 		panic(err)
 	}
 
